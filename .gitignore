@@ -1,0 +1,16 @@
+# Ignore object files
+*.o
+
+# Ignore generated lexer and parser files
+lex.yy.c
+parser.tab.c
+parser.tab.h
+
+# Ignore executable
+mini_compiler
+
+# Ignore backup and temp files
+*.swp
+*.bak
+*.tmp
+
