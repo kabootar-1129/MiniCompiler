@@ -1,0 +1,195 @@
+State 16 conflicts: 1 shift/reduce
+
+
+Grammar
+
+    0 $accept: program $end
+
+    1 program: program statement
+    2        | statement
+
+    3 statement: INT ID ASSIGN expression SEMI
+    4          | ID ASSIGN expression SEMI
+
+    5 expression: expression PLUS expression
+    6           | NUMBER
+    7           | ID
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    error (256)
+    NUMBER <num> (258) 6
+    ID <id> (259) 3 4 7
+    INT (260) 3
+    ASSIGN (261) 3 4
+    PLUS (262) 5
+    SEMI (263) 3 4
+
+
+Nonterminals, with rules where they appear
+
+    $accept (9)
+        on left: 0
+    program (10)
+        on left: 1 2
+        on right: 0 1
+    statement (11)
+        on left: 3 4
+        on right: 1 2
+    expression <num> (12)
+        on left: 5 6 7
+        on right: 3 4 5
+
+
+State 0
+
+    0 $accept: • program $end
+
+    ID   shift, and go to state 1
+    INT  shift, and go to state 2
+
+    program    go to state 3
+    statement  go to state 4
+
+
+State 1
+
+    4 statement: ID • ASSIGN expression SEMI
+
+    ASSIGN  shift, and go to state 5
+
+
+State 2
+
+    3 statement: INT • ID ASSIGN expression SEMI
+
+    ID  shift, and go to state 6
+
+
+State 3
+
+    0 $accept: program • $end
+    1 program: program • statement
+
+    $end  shift, and go to state 7
+    ID    shift, and go to state 1
+    INT   shift, and go to state 2
+
+    statement  go to state 8
+
+
+State 4
+
+    2 program: statement •
+
+    $default  reduce using rule 2 (program)
+
+
+State 5
+
+    4 statement: ID ASSIGN • expression SEMI
+
+    NUMBER  shift, and go to state 9
+    ID      shift, and go to state 10
+
+    expression  go to state 11
+
+
+State 6
+
+    3 statement: INT ID • ASSIGN expression SEMI
+
+    ASSIGN  shift, and go to state 12
+
+
+State 7
+
+    0 $accept: program $end •
+
+    $default  accept
+
+
+State 8
+
+    1 program: program statement •
+
+    $default  reduce using rule 1 (program)
+
+
+State 9
+
+    6 expression: NUMBER •
+
+    $default  reduce using rule 6 (expression)
+
+
+State 10
+
+    7 expression: ID •
+
+    $default  reduce using rule 7 (expression)
+
+
+State 11
+
+    4 statement: ID ASSIGN expression • SEMI
+    5 expression: expression • PLUS expression
+
+    PLUS  shift, and go to state 13
+    SEMI  shift, and go to state 14
+
+
+State 12
+
+    3 statement: INT ID ASSIGN • expression SEMI
+
+    NUMBER  shift, and go to state 9
+    ID      shift, and go to state 10
+
+    expression  go to state 15
+
+
+State 13
+
+    5 expression: expression PLUS • expression
+
+    NUMBER  shift, and go to state 9
+    ID      shift, and go to state 10
+
+    expression  go to state 16
+
+
+State 14
+
+    4 statement: ID ASSIGN expression SEMI •
+
+    $default  reduce using rule 4 (statement)
+
+
+State 15
+
+    3 statement: INT ID ASSIGN expression • SEMI
+    5 expression: expression • PLUS expression
+
+    PLUS  shift, and go to state 13
+    SEMI  shift, and go to state 17
+
+
+State 16
+
+    5 expression: expression • PLUS expression
+    5           | expression PLUS expression •
+
+    PLUS  shift, and go to state 13
+
+    PLUS      [reduce using rule 5 (expression)]
+    $default  reduce using rule 5 (expression)
+
+
+State 17
+
+    3 statement: INT ID ASSIGN expression SEMI •
+
+    $default  reduce using rule 3 (statement)
