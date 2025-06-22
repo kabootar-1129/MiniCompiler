@@ -1,7 +1,7 @@
 all: mini_compiler
 
 mini_compiler: lex.yy.c parser.tab.c semantic.o symbol_table.o
-	gcc lex.yy.c parser.tab.c semantic.o symbol_table.o -o mini_compiler -lfl
+	gcc lex.yy.c parser.tab.c semantic.o symbol_table.o -o mini_compiler 
 
 lex.yy.c: lexer.l parser.tab.h
 	flex lexer.l
